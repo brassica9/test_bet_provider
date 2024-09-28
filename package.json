@@ -1,0 +1,19 @@
+{
+  "name": "test_bet_provider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brassica9/test_bet_provider.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brassica9/test_bet_provider/issues"
+  },
+  "homepage": "https://github.com/brassica9/test_bet_provider#readme"
+}
