@@ -12,3 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Event {
+  id Int @id @default(autoincrement())
+  coefficient Float
+  deadline DateTime
+  status String @default("pending")
+  bet Bet[]
+}
+
+model Bet {
+  id Int @id @default(autoincrement())
+  eventId Int
+  event Event @relation(fields: [eventId], references: [id])
+  amount Float
+  potentialWin Float
+  status String @default("pending")
+}
