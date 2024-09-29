@@ -20,6 +20,11 @@ export async function createEventHandler(
   rep: FastifyReply
 ) {
   const body = req.body;
+  if (body.coefficient <= 0) {
+    return rep
+      .code(400)
+      .send({ message: "Coefficient must be a positive number." });
+  }
 
   try {
     const event = await createEvent(body);
@@ -39,7 +44,8 @@ export async function changeStatusHandler(
   rep: FastifyReply
 ) {
   const body = req.body;
-  const idEvent = parseInt(req.params.id, 10)
+  const idEvent = req.params.id
+
   try {
     const event = await statusEvent(idEvent, body);
 
