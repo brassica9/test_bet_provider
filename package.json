@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "start:provider": "npm --prefix provider run start",
+    "start:bet-platform": "npm --prefix bet-platform run start",
+    "start:all": "npm run start:provider & npm run start:bet-platform",
+    "dev:provider": "npm --prefix provider run dev",
+    "dev:bet-platform": "npm --prefix bet-platform run dev",
+    "dev:all": "npm run dev:provider & npm run dev:bet-platform",
+    "migrate": "prisma migrate dev --name init",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

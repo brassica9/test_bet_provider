@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Event {
-  id Int @id @default(autoincrement())
+  id String @id @db.VarChar
   coefficient Float
   deadline DateTime
   status String @default("pending")
@@ -22,8 +22,8 @@ model Event {
 }
 
 model Bet {
-  id Int @id @default(autoincrement())
-  eventId Int
+  betId String @id @db.VarChar
+  eventId String @db.VarChar
   event Event @relation(fields: [eventId], references: [id])
   amount Float
   potentialWin Float

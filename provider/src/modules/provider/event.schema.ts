@@ -23,13 +23,12 @@ export const statusEventSchema = {
 };
 
 export type EventResponse = {
-  id: number;
+  id: string;
   coefficient: number;
   deadline: number;
   status: string;
 };
 
-// export type StatusEventInput = 'first_team_won' | 'second_team_won';
 export type StatusEventInput= Pick<EventResponse, 'status'>
 
 export type CreateEventInput = Pick<EventResponse, 'coefficient' | 'deadline'>

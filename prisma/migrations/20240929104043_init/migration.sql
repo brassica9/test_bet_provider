@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Event" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR NOT NULL,
     "coefficient" DOUBLE PRECISION NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
@@ -10,13 +10,13 @@ CREATE TABLE "Event" (
 
 -- CreateTable
 CREATE TABLE "Bet" (
-    "id" SERIAL NOT NULL,
-    "eventId" INTEGER NOT NULL,
+    "betId" VARCHAR NOT NULL,
+    "eventId" VARCHAR NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
     "potentialWin" DOUBLE PRECISION NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
 
-    CONSTRAINT "Bet_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Bet_pkey" PRIMARY KEY ("betId")
 );
 
 -- AddForeignKey
