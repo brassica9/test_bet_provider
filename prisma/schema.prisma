@@ -19,6 +19,7 @@ model Event {
   deadline DateTime
   status String @default("pending")
   bet Bet[]
+  createdAt DateTime @default(now()) //для сортировки при создании нового id
 }
 
 model Bet {
@@ -28,4 +29,5 @@ model Bet {
   amount Float
   potentialWin Float
   status String @default("pending")
+  createdAt DateTime @default(now()) //для сортировки при создании нового id
 }

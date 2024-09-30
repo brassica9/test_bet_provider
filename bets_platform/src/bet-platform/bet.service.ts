@@ -1,8 +1,19 @@
 import prisma from "../../../utils/prisma";
 import { CreateBetInput } from "./bet.schema";
 
+const selectedBet = { // для сортировки выводимых данных
+  betId: true,
+  eventId: true,
+  amount: true,
+  potentialWin: true,
+  status: true,
+};
+
 export async function getBet() {
-  const bets = await prisma.bet.findMany();
+  const bets = await prisma.bet.findMany({
+    select: selectedBet,
+    orderBy: { createdAt: "asc" } // выводим данные с первых созданных
+  });
   return bets;
 }
 
@@ -24,32 +35,18 @@ export async function createBet(input: CreateBetInput) {
   const sumPotentialWin = event.coefficient * input.amount;
 
   const lastBet = await prisma.bet.findFirst({
-    orderBy: { betId: "desc" },
+    orderBy: { createdAt: "desc" },
   });
 
-  console.log(lastBet);
-
-  let newId;
-
-  if (lastBet) {
-    // Извлекаем числовую часть идентификатора
-    const match = lastBet.betId.match(/bet(\d+)/);
-    if (match) {
-      const numberPart = parseInt(match[1], 10);
-      newId = `bet${numberPart + 1}`; // Увеличиваем на 1
-    } else {
-      newId = "bet1"; // Если идентификатор не соответствует формату
-    }
-  } else {
-    newId = "bet1"; // Если нет ставок
-  }
+  const newId = lastBet
+    ? `bet${parseInt(lastBet.betId.replace("bet", ""), 10) + 1}`
+    : "bet1";
 
   if (!newId) {
     throw new Error(
       "Failed to generate a unique betId after several attempts."
     );
   }
-  console.log("=======", newId);
 
   const bet = await prisma.bet.create({
     data: {
@@ -58,10 +55,7 @@ export async function createBet(input: CreateBetInput) {
       amount: parseFloat(input.amount.toFixed(2)),
       potentialWin: parseFloat(sumPotentialWin.toFixed(2)),
     },
-  });
-  console.log("========", {
-    amount: bet.amount.toFixed(2),
-    potentialWin: bet.potentialWin.toFixed(2),
+    select: selectedBet
   });
 
   return {
@@ -85,6 +79,7 @@ export async function getEvents() {
       coefficient: true,
       deadline: true,
     },
+    orderBy: { createdAt: "asc" }
   });
   return events.map((event) => ({
     ...event,
