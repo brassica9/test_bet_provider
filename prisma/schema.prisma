@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id String @id @db.VarChar
+  coefficient Float
+  deadline DateTime
+  status String @default("pending")
+  bet Bet[]
+  createdAt DateTime @default(now()) //для сортировки при создании нового id
+}
+
+model Bet {
+  betId String @id @db.VarChar
+  eventId String @db.VarChar
+  event Event @relation(fields: [eventId], references: [id])
+  amount Float
+  potentialWin Float
+  status String @default("pending")
+  createdAt DateTime @default(now()) //для сортировки при создании нового id
+}

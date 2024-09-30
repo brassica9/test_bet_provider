@@ -1,0 +1,39 @@
+{
+  "name": "test_bet_provider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:provider": "npm --prefix provider run start",
+    "start:bets_platform": "npm --prefix bets_platform run start",
+    "start:all": "npm run start:provider & npm run start:bets_platform",
+    "dev:provider": "npm --prefix provider run dev",
+    "dev:bets_platform": "npm --prefix bets_platform run dev",
+    "migrate": "prisma migrate dev --name init",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brassica9/test_bet_provider.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brassica9/test_bet_provider/issues"
+  },
+  "homepage": "https://github.com/brassica9/test_bet_provider#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node-dev": "^2.0.0",
+    "prisma": "^5.20.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@fastify/swagger": "^9.1.0",
+    "@prisma/client": "^5.20.0",
+    "fastify": "^4.28.1",
+    "fastify-zod": "^1.4.0"
+  }
+}

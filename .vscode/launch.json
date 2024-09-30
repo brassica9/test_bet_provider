@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Provider",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/provider",
+      "env": {
+        "NODE_ENV": "development",
+        "DATABASE_URL": "postgres://Natasha:123@db:5432/testBetProvider", // Замените на ваши значения
+        "PROVIDER_PORT": "3000" // Порт для provider
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "outFiles": ["${workspaceFolder}/provider/dist/**/*.js"]
+    },
+    {
+      "name": "Debug Bet Platform",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/bet-platform",
+      "env": {
+        "NODE_ENV": "development",
+        "DATABASE_URL": "postgres://Natasha:123@db:5432/testBetProvider",
+        "BET_PLATFORM_PORT": "3001" // Порт для bet-platform
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "outFiles": ["${workspaceFolder}/bet-platform/dist/**/*.js"]
+    }
+  ]
+}
