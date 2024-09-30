@@ -18,8 +18,6 @@ export async function webhookRoutes(server: FastifyInstance) {
       const { eventId, status } = req.body;
 
       try {
-        console.log(eventId, status, "контролер webhookRoutes");
-
         await createWebhookHandler(eventId, status);
       } catch (error) {
         console.error(error);

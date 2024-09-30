@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import betsRoutes from "./bet-platform/bet.route";
-import { webhookRoutes } from "./webhooks/webhooks.controller";
+import { webhookRoutes } from "./webhooks/webhooks.roure";
 
 const server = Fastify();
 
