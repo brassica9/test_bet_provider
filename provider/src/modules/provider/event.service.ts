@@ -63,38 +63,3 @@ export async function statusEvent(id: string, input: StatusEventInput) {
     deadline: Math.floor(event.deadline.getTime() / 1000),
   };
 }
-
-it('should update event status and notify the bet platform', async () => {
-  const eventId = 'event1';
-  const input = { status: 'completed' };
-  
-  const mockEvent = {
-      id: eventId,
-      coefficient: 1.5,
-      deadline: new Date('2024-09-30T10:52:00.000Z'), // Пример даты
-      status: 'completed',
-      createdAt: new Date('2024-09-30T10:52:00.000Z'),
-  };
-
-  // Настраиваем mock для update
-  (prisma.event.update as jest.Mock).mockResolvedValue(mockEvent);
-
-  // Вызываем функцию
-  const result = await statusEvent(eventId, input);
-
-  // Проверяем, что статус события обновлен
-  expect(result).toEqual({
-      ...mockEvent,
-      deadline: Math.floor(mockEvent.deadline.getTime() / 1000), // Проверяем таймстемп
-  });
-
-  // Проверяем, что prisma.event.update был вызван с правильными параметрами
-  expect(prisma.event.update).toHaveBeenCalledWith({
-      where: { id: eventId },
-      data: { status: input.status },
-      select: expect.any(Object), // Можно уточнить, если необходимо
-  });
-
-  // Проверяем, что notifyBetPlatform был вызван с правильными параметрами
-  expect(notifyBetPlatform).toHaveBeenCalledWith(eventId, input.status);
-});

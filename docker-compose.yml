@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  provider:
+    build:
+      context: ./provider  # Путь к папке с сервисом provider
+    container_name: provider_service
+    environment:
+      DATABASE_URL: ${DATABASE_URL}  
+    depends_on:
+      - db
+    ports:
+      - "${PROVIDER_PORT}:${PROVIDER_PORT}"
+    command: npm run start  
+    volumes:
+      - ./provider:/usr/src/app
+
+  bet_platform:
+    build:
+      context: ./bets_platform  # Путь к папке с сервисом bet-platform
+    container_name: bet_platform_service
+    environment:
+      DATABASE_URL: ${DATABASE_URL}  
+    depends_on:
+      - db
+    ports:
+      - "${BET_PLATFORM_PORT}:${BET_PLATFORM_PORT}"
+    command: npm run start  
+    volumes:
+      - ./bet-platform:/usr/src/app
+
+  migrate:
+    image: node:18
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    command: npm run migrate
+    environment:
+      DATABASE_URL: ${DATABASE_URL}  
+    depends_on:
+      - db
+
+volumes:
+  db-data:

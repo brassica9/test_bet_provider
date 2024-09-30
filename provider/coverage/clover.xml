@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1727710983990" clover="3.2.0">
-  <project timestamp="1727710983990" name="All files">
+<coverage generated="1727712601909" clover="3.2.0">
+  <project timestamp="1727712601909" name="All files">
     <metrics statements="100" coveredstatements="100" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3" elements="110" coveredelements="109" complexity="0" loc="100" ncloc="100" packages="1" files="1" classes="1"/>
     <file name="event.service.ts" path="/Users/Natasha/Documents/test_bet_provider/provider/src/modules/provider/event.service.ts">
       <metrics statements="100" coveredstatements="100" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3"/>

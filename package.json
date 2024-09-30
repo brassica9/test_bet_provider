@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start:provider": "npm --prefix provider run start",
-    "start:bet-platform": "npm --prefix bet-platform run start",
-    "start:all": "npm run start:provider & npm run start:bet-platform",
+    "start:bets_platform": "npm --prefix bets_platform run start",
+    "start:all": "npm run start:provider & npm run start:bets_platform",
     "dev:provider": "npm --prefix provider run dev",
-    "dev:bet-platform": "npm --prefix bet-platform run dev",
-    "dev:all": "npm run dev:provider & npm run dev:bet-platform",
+    "dev:bets_platform": "npm --prefix bets_platform run dev",
     "migrate": "prisma migrate dev --name init",
     "test": "jest"
   },
@@ -26,9 +25,9 @@
   "devDependencies": {
     "@types/jest": "^29.5.13",
     "jest": "^29.7.0",
-    "prisma": "^5.20.0",
     "ts-jest": "^29.2.5",
     "ts-node-dev": "^2.0.0",
+    "prisma": "^5.20.0",
     "typescript": "^5.6.2"
   },
   "dependencies": {
